@@ -87,5 +87,13 @@ EOT
       service = string
     })))
   }))
+  validation {
+    condition = alltrue([
+      for k, v in var.jira_cloud_account_mapping_rules : (
+        length(v.name) <= 100
+      )
+    ])
+    error_message = "must be at most 100 characters"
+  }
 }
 
